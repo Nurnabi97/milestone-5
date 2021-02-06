@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json placeholder</title>
+</head>
+
+<body>
+    <h1>JSON PLACEHOLDER</h1>
+    <ul id="users-container"></ul>
+    <input id="mainTitle" type="text" placeholder="title">
+    <br>
+    <input id="bodyText" type="text" placeholder="body-text">
+    <br>
+    <button onclick="pickAndSubmit()" id="submit">submit</button>  
+
+    <script>
+
+        //   const postInfo = { title: 'foo BAPEX', body: 'bar DHAKA', userId: 1,} // post stature or syntax.
+
+        function pickAndSubmit() {
+            const titleInput = document.getElementById("mainTitle").value; //get value form mainTitle
+            const bodyInput = document.getElementById("bodyText").value; //get value form bodyText.
+            // console.log(title, body);
+            const post = { title: titleInput, body: bodyInput};  //post orientation to display.
+            nowPostToServer(post);  //calling post function and passing name (post) inside function for post.
+
+        }
+
+
+        //this is post method.
+        function nowPostToServer(postInfo) {
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: JSON.stringify(postInfo),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => console.log(data));
+        };
+    </script>
+</body>
+
+</html>

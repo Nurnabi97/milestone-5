@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rest-countries api</title>
+    <link rel="stylesheet" href="api_2.css">
+</head>
+
+<body>
+
+    <div id="countryDetails"></div>
+    <div id="rest-countries"></div>
+
+</body>
+<script>
+    fetch('https://restcountries.eu/rest/v2/all')   //calling api
+        .then(res => res.json())    //converting json format.
+        .then(data => viewCountries(data)) // no need any (;) when line finished.
+
+    const viewCountries = country => {  //country = data
+        const mainDiv = document.getElementById('rest-countries');
+        country.forEach(countries => {  //now country's all data goes to countries one bye one. country = countries
+            // console.log(country);
+            const countryDiv = document.createElement('div');   //creating virtual div
+            countryDiv.className = 'country';   //creating className in every div for css
+            const countryInfo = `<h1>${countries.name}</h1> 
+        <h2>${countries.capital}</h2>   
+        <button onclick="countryDetails('${countries.name}')">Details</button`; //onclick(''). without ('') it's work just string. inside ${''} it's will dynamic.
+            countryDiv.innerHTML = countryInfo; //add countryInfo inside countryDiv
+            // console.log(countryDiv);
+            mainDiv.appendChild(countryDiv);    //add countryDiv inside mainDiv
+        });
+    };
+
+    const countryDetails = countryName => { //onclick event callback function countryName = ${countries.name}
+        const url = `https://restcountries.eu/rest/v2/name/${countryName}`; //for dynamic countryName API
+        // console.log(url);    //uncomment console to see how it's work 
+        fetch(url)
+        .then(res => res.json())
+        // .then(data =>console.log(data)); 
+        .then(data => displayCountryDetails(data[0]))   //data[0] because data get inside array
+
+    }
+
+    const displayCountryDetails = country => {  //country = data[0]
+        const countryDetails = document.getElementById('countryDetails');   //to display onclick data.
+        countryDetails.innerHTML = `
+        <h1>Name of country: ${country.name}</h1>
+        <h3>Population: ${country.population}</h3>
+        <h3>Area: ${country.area}</h3>
+        <img id="flag" src="${country.flag}"> `;    //all data get from api with respect ${country.name/something}
+        //you can add class/id inside the tag (<h1 ld='h'></>) to add css.
+    }
+
+</script>
+
+</html>

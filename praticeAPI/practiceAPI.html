@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>country information</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+    <section>
+        <div class="d-flex justify-content-around">
+            <div class=" country">
+                <h1 onclick="eventHandel(country)" id="bd">Bangladesh</h1>
+            </div>
+            <div class="country">
+                <h1>France</h1>
+            </div>
+            <div class="country">
+                <h1>Bhutan</h1>
+            </div>
+            <div class="country">
+                <h1>China</h1>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around ">
+            <div class=" country">
+                <h1 id="af">Afghanistan</h1>
+            </div>
+            <div class="country">
+                <h1>Germany</h1>
+            </div>
+            <div class="country">
+                <h1>Belgium</h1>
+            </div>
+            <div class="country">
+                <h1>Canada</h1>
+            </div>
+        </div>
+    </section>
+    <div>
+        <ul id="ul">List items</ul>
+    </div>
+    <script>
+        async function countryData() {
+            const response = await fetch('https://restcountries.eu/rest/v2/all')
+            console.log(response);
+            const country = await response.json();
+            console.log(country);
+            return country;
+
+
+        };
+
+        countryData().then(country => {
+            pickUpData(country);
+        });
+
+
+        function pickUpData(country) {
+            // for (let i = 0; i < country.length; i++) {
+            //     const countryInfo = country[i];
+            //     console.log(countryInfo.name);
+            //     const li = document.createElement('li');
+            //     li.innerText = countryInfo.name;
+            //     const ul = document.getElementById('ul');
+            //     ul.appendChild(li);
+
+            // }
+            const countryInfo = country.map(e => e.name);
+            const countryPopu = country.map(e => e.population);
+            const countryAr = country.map(e => e.area);
+            const countryName = countryInfo[18];
+            const countryPopulation = countryPopu[18];
+            const countryArea = countryAr[18];
+            console.log(countryName);
+
+
+            document.getElementById('bd').addEventListener('click', function () {
+
+                document.getElementById('bd').innerText = `name: ${countryName}
+                population: ${countryPopulation}
+                area: ${countryArea} Square km`;
+            });
+        };
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

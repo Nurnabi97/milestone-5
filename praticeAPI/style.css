@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.country{
+    background-color: #bbb;
+    margin-top: 50px;
+    padding: 50px;
+    cursor: pointer;
+    
+}
+.country:hover{
+    color: green;
+    text-decoration: underline;
+}

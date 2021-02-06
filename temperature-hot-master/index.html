@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Temperature Hot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url(images/bg-image.jpg) no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form class="col-md-6 m-auto py-5">
+            <div class="input-group mb-3">
+                <input id="input-field" type="text" class="form-control" placeholder="Enter a location for Weather ...">
+                <div class="input-group-append">
+                    <button onclick="searchBtn()" type="button" class="btn btn-danger">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="weather-status text-white text-center">
+            <img id="icon" src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+            <h1 id="city-name">City name</h1>
+            <h3><span id="temparature">38.06</span>&deg;C</h3>
+            <h1 id="clouds" class="lead">Clouds</h1>
+            <h3 id="time-zone">time zone</h3>
+        </div>
+    </div>
+    <script>
+        function searchBtn() {
+            const inputValue = document.getElementById('input-field').value;
+
+            getTemp(inputValue);
+        };
+
+
+        function getTemp(inputValue) {
+            fetch('https://api.openweathermap.org/data/2.5/weather?q='+inputValue+'&appid=8cc278548bfe341638bdbbe4f3457c51&units=metric')
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                   
+                    const icon = data.weather[0].icon;
+                    console.log(icon);
+                    document.getElementById('icon').innerText = icon;
+
+                    const country = data.name;
+                    document.getElementById('city-name').innerText = country;
+                    const temperature = data.main.temp;
+                    document.getElementById('temparature').innerText = temperature;
+
+                    const clouds = data.clouds.all;
+                    document.getElementById('clouds').innerText = `clouds: ${clouds}`;
+
+                    const timeZone = data.timezone;
+                    // const time = timeZone.toGMTString();
+                    document.getElementById('time-zone').innerText = timeZone;
+
+                    console.log(temperature);
+                   
+                })
+                // .catch(error => error.alert("wrong city name"))
+        }
+    </script>
+
+</body>
+
+
+</html>

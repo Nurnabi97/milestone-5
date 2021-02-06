@@ -1,0 +1,40 @@
+//https://jsonplaceholder.typicode.com/
+//https://web.programming-hero.com/course/video/web-3-24-5-load-data-json-placeholder-get-data-display-data-on-ui
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json placeholder</title>
+</head>
+
+<body>
+    <h1>JSON PLACEHOLDER</h1>
+    <ul id="users-container"></ul>
+    <script>
+
+        //this is get method
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => displayUsers(json))
+            // .catch(error => console.log(error)); // to get error
+
+        function displayUsers(users) {
+            const ul = document.getElementById('users-container');  //create a empty ul to show list items.  
+            const userNames = users.map(user => user.username); //pickup the username form json.  
+            console.log(userNames);
+            for (let i = 0; i < userNames.length; i++) {    //continue a loop to get one by one username.
+                const names = userNames[i];
+            const li = document.createElement('li');    //create a list 
+            li.innerText = names;   //display the userNames inside the list
+            ul.appendChild(li); //throw the list inside a ul.
+            }
+
+        };
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get a task form API</title>
+</head>
+<body>
+    <h1 id="activity">Do something new</h1>
+    <div>learn more <a href="">click here</a></div>
+
+    <script>
+        function boreHack(){
+        fetch('http://www.boredapi.com/api/activity/')  //calling a api function.
+        .then(response => response.json())  //converting json format.
+        .then(data => {
+            document.getElementById('activity').innerText = data.activity; // to display 
+        })
+    };
+
+    setInterval(() => { //setInterval 
+        boreHack()
+    }, 10000)   //set interval time.
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+//https://jsonplaceholder.typicode.com/
+//https://web.programming-hero.com/course/video/web-3-24-5-load-data-json-placeholder-get-data-display-data-on-ui
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json placeholder</title>
+</head>
+
+<body>
+    <h1>JSON PLACEHOLDER</h1>
+    <ul id="users-container"></ul>
+    <script>
+        const userInfo = {name: 'nurnabi', id: 778,};
+        const userJSON = JSON.stringify(userInfo);
+        console.log(userJSON);  //output = {"name":"nurnabi","id":778} like string-object. use for post dat
+        
+        const userFormJSON = JSON.parse(userJSON);
+        console.log(userFormJSON);  //output = {name: "nurnabi", id: 778} like object. use for get data.
+
+    </script>
+</body>
+
+</html>

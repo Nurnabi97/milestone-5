@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random user API</title>
+</head>
+
+<body>
+    <h1>Random user</h1>
+    <h3 id="user-name">user name</h3>
+    <h3 id="user-name1"> ful user name</h3>
+
+
+    <script>
+        fetch('https://randomuser.me/api/')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);  //get total data = {results: Array(1), info: {…}}
+                const user = data.results[0];   //pickup 0 (zero's) data from inside results
+                console.log(user);  //{gender: "female", name: {…}, location: {…}, email: "matilda.harris@example.com", login: {…}, …}
+                const userName = user.name; //slot data by name you can also slot by gender, email ect.
+                console.log(userName);  //{title: "Ms", first: "Matilda", last: "Harris"}
+                document.getElementById('user-name').innerText = userName.last; //slot/display first/last name you want.
+                
+                const fullName = `${userName.title} ${userName.first} ${userName.last}`; //coupling total name
+
+                document.getElementById('user-name1').innerText = fullName; // to display fullName.
+
+            })
+    </script>
+
+</body>
+
+</html>
